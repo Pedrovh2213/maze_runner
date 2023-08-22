@@ -71,25 +71,17 @@ pos_t load_maze(const char *file_name)
 		// Aloca cada linha da matriz
 		maze[i] = (char *)malloc(num_cols * sizeof(char));
 	}
-	 while ((c = fgetc(file)) != EOF) {
-        if (c == '\n') {
-            maze[num_rows][num_cols] = '\0'; // Adiciona o caractere nulo ao final da linha
-            num_rows++;
-            num_cols = 0;
-        } else {
-            maze[num_rows][num_cols] = c;
-            num_cols++;
-        }
-    }
-		/*for (int i = 0; i < num_rows; ++i)
+	 
+		for (int i = 0; i < num_rows; ++i)
 		{
 			for (int j = 0; j < num_cols; ++j)
 			{
-				
+				maze[i][j] = fgetc(file);
 				// Le o valor da linha i+1,j do arquivo e salva na posição maze[i][j]
 				// Se o valor for 'e' salvar o valor em initial_pos
 			}
-		}*/
+			fgetc(file);
+		}
 	return initial_pos;
 	fclose(file);
 }
@@ -103,7 +95,7 @@ void print_maze()
 		{
 			printf("%c", maze[i][j]);
 		}
-		printf("\n");
+		//printf("\n");
 	}
 }
 
