@@ -64,26 +64,32 @@ pos_t load_maze(const char *file_name)
 
 	// Le o numero de linhas e colunas (fscanf)
 	// e salva em num_rows e num_cols
- char c;
-    while (file.get(c)) {
+
+	// Aloca a matriz maze (malloc)
+	char **maze = (char **)malloc(num_rows * sizeof(char *));
+	for (int i = 0; i < num_rows; ++i){
+		// Aloca cada linha da matriz
+		maze[i] = (char *)malloc(num_cols * sizeof(char));
+	}
+	 while ((c = fgetc(file)) != EOF) {
         if (c == '\n') {
-            matrix.push_back(std::vector<char>()); // Nova linha na matriz
+            maze[num_rows][num_cols] = '\0'; // Adiciona o caractere nulo ao final da linha
+            num_rows++;
+            num_cols = 0;
         } else {
-            matrix.back().push_back(c); // Adiciona o caractere à última linha
+            maze[num_rows][num_cols] = c;
+            num_cols++;
         }
     }
-	// Aloca a matriz maze (malloc)
-	for (int i = 0; i < num_rows; ++i)
-		// Aloca cada linha da matriz
-
-		for (int i = 0; i < num_rows; ++i)
+		/*for (int i = 0; i < num_rows; ++i)
 		{
 			for (int j = 0; j < num_cols; ++j)
 			{
+				
 				// Le o valor da linha i+1,j do arquivo e salva na posição maze[i][j]
 				// Se o valor for 'e' salvar o valor em initial_pos
 			}
-		}
+		}*/
 	return initial_pos;
 	fclose(file);
 }
